@@ -22,6 +22,14 @@
                padding: 18px;
                text-transform: capitalize;
           }
+          .cls-btn{
+               border: none;
+               outline: none;
+               padding: 5px 9px;
+               border-radius: 5px;
+               background: rgba(184, 67, 67, 0.822);
+               cursor: pointer;
+          }
      </style>
 </head>
 
@@ -34,8 +42,9 @@
                </form>
           </div>
           <div id="result">
-               <span>tast list</span>
+               <!-- <span>tast list</span> -->
           </div>
+          <button class="cls-btn">Clear Task</button>
      </main>
 
      <!-- *********** JavaScript code ************** -->
@@ -43,8 +52,63 @@
           let input = document.getElementById('input').value;
           let submit = document.getElementById('submit');
           submit.addEventListener('click', () => {
-               console.log(input);
+               if(input,value.trim() !=0){
+               let localItems = JSON.parse(localStorage.getItem('localItem'));
+               if (localItems === null) {
+                    tasklist = []
+               } else {
+                    tasklist = localItems;
+               }
+               tasklist.push(input)
+               localStorage.setItem('localItem', JSON.stringify(tasklist));
+               }
+               // console.log("hey");
+               let localItems = JSON.parse(localStorage.getItem('localItem'));
+               if (localItems === null) {
+                    tasklist = []
+               } else {
+                    tasklist = localItems;
+               }
+               tasklist.push(input)
+               localStorage.setItem('localItem', JSON.stringify(tasklist));
+               showlist();
+
           })
+
+          function showlist() {
+               let taskShow = '';
+               let taskShowItem = document.getElementById('result');
+               let localItems = JSON.parse(localStorage.getItem('localItem'));
+               if (localItems === null) {
+                    tasklist = []
+               } else {
+                    tasklist = localItems;
+               }
+               tasklist.push(input)
+               localStorage.setItem('localItem', JSON.stringify(tasklist));
+               tasklist.forEach((element, index) => {
+                    output += `
+               <div class = "todolist">
+                    <p class="ptage">${element}</p> 
+                    <button class ="deleteTask" onclick="deleteItem(${index})">x</button>
+                    </div>
+               `
+               });
+               taskShowItem.innerHTML = output;
+          }
+          showlist();
+
+          function deleteItem(index) {
+               let localItems = JSON.parse(localStorage.getItem('localItem'));
+               tasklist.splice(index, 1)
+               localStorage.setItem('localItem', JSON.stringify(tasklist));
+               showlist();
+          }
+          const clsBtn = document.querySelectorAll('.cls-btn');
+          clsBtn.addEventListener('click', () =>{
+               localStorage.clear();
+               showlist()
+          });
      </script>
 </body>
 
