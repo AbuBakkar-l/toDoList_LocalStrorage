@@ -14,7 +14,7 @@
                flex-direction: column;
                justify-content: center;
                align-items: center;
-               overflow: hidden;
+               overflow-x: hidden;
                background-color: rgb(201, 197, 197);
           }
 
@@ -22,13 +22,18 @@
                padding: 18px;
                text-transform: capitalize;
           }
-          .cls-btn{
+
+          .cls-btn {
                border: none;
                outline: none;
                padding: 5px 9px;
                border-radius: 5px;
                background: rgba(184, 67, 67, 0.822);
                cursor: pointer;
+          }
+          .todolist{
+               background-color: red;
+               
           }
      </style>
 </head>
@@ -52,15 +57,15 @@
           let input = document.getElementById('input').value;
           let submit = document.getElementById('submit');
           submit.addEventListener('click', () => {
-               if(input,value.trim() !=0){
-               let localItems = JSON.parse(localStorage.getItem('localItem'));
-               if (localItems === null) {
-                    tasklist = []
-               } else {
-                    tasklist = localItems;
-               }
-               tasklist.push(input)
-               localStorage.setItem('localItem', JSON.stringify(tasklist));
+               if (input, value.trim() != 0) {
+                    let localItems = JSON.parse(localStorage.getItem('localItem'));
+                    if (localItems === null) {
+                         tasklist = []
+                    } else {
+                         tasklist = localItems;
+                    }
+                    tasklist.push(input.value)
+                    localStorage.setItem('localItem', JSON.stringify(tasklist));
                }
                // console.log("hey");
                let localItems = JSON.parse(localStorage.getItem('localItem'));
@@ -87,14 +92,14 @@
                tasklist.push(input)
                localStorage.setItem('localItem', JSON.stringify(tasklist));
                tasklist.forEach((element, index) => {
-                    output += `
+                    taskShow += `
                <div class = "todolist">
                     <p class="ptage">${element}</p> 
                     <button class ="deleteTask" onclick="deleteItem(${index})">x</button>
                     </div>
                `
                });
-               taskShowItem.innerHTML = output;
+               taskShowItem.innerHTML = taskShow;
           }
           showlist();
 
@@ -104,10 +109,10 @@
                localStorage.setItem('localItem', JSON.stringify(tasklist));
                showlist();
           }
-          const clsBtn = document.querySelectorAll('.cls-btn');
-          clsBtn.addEventListener('click', () =>{
+          const clsBtn = document.querySelector('.cls-btn')
+          clsBtn.addEventListener('click', () => {
                localStorage.clear();
-               showlist()
+               showlist();
           });
      </script>
 </body>
