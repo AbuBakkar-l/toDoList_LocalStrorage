@@ -35,6 +35,12 @@
                background-color: red;
                
           }
+          .ptage{
+               background-color: teal;
+          }
+          .deleteTask{
+               background: yellow;
+          }
      </style>
 </head>
 
@@ -56,17 +62,19 @@
      <script>
           let input = document.getElementById('input').value;
           let submit = document.getElementById('submit');
-          submit.addEventListener('click', () => {
-               if (input, value.trim() != 0) {
-                    let localItems = JSON.parse(localStorage.getItem('localItem'));
-                    if (localItems === null) {
-                         tasklist = []
-                    } else {
-                         tasklist = localItems;
-                    }
-                    tasklist.push(input.value)
-                    localStorage.setItem('localItem', JSON.stringify(tasklist));
-               }
+          submit.addEventListener('submit', () => {
+               // if (input, value.trim() != 0) {
+               //      let localItems = JSON.parse(localStorage.getItem('localItem'));
+               //      if (localItems === null) {
+               //           tasklist = []
+               //      } else {
+               //           tasklist = localItems;
+               //      }
+               //      tasklist.push(input[0].value)
+               //      localStorage.setItem('localItem', JSON.stringify(tasklist));
+               // }
+
+               
                // console.log("hey");
                let localItems = JSON.parse(localStorage.getItem('localItem'));
                if (localItems === null) {
@@ -74,10 +82,10 @@
                } else {
                     tasklist = localItems;
                }
-               tasklist.push(input)
+               tasklist.push(input.value)
                localStorage.setItem('localItem', JSON.stringify(tasklist));
                showlist();
-
+               location.reload();
           })
 
           function showlist() {
@@ -92,8 +100,8 @@
                tasklist.push(input)
                localStorage.setItem('localItem', JSON.stringify(tasklist));
                tasklist.forEach((element, index) => {
-                    taskShow += `
-               <div class = "todolist">
+                    taskShow +=`
+                    <div class = "todolist">
                     <p class="ptage">${element}</p> 
                     <button class ="deleteTask" onclick="deleteItem(${index})">x</button>
                     </div>
