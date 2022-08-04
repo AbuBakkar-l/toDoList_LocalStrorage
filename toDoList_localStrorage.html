@@ -9,13 +9,54 @@
      <style>
           body {
                display: flex;
-               width: 100vw;
-               height: 100vh;
+               /* width: 100vw;
+               height: 100vh; */
                flex-direction: column;
                justify-content: center;
                align-items: center;
                overflow-x: hidden;
                background-color: rgb(201, 197, 197);
+          }
+          .container{
+               border: 1px solid rgba(75, 72, 78, 0.689);
+               background: rgba(55, 115, 119, 0.45);
+               border-radius: 8px;
+               box-shadow: 2px 3px 8px 2px rgba(51, 51, 51, 0.59);
+               height: 100%;
+               padding: 0px 40px;
+               margin: 20px 0px;
+          }
+          h1{
+               /* color: brown; */
+               font-size: 2.33em;
+               padding-left: 29px;
+          }
+          input[type="text"]{
+               /* background-color: red; */
+               /* padding-bottom: 30px; */
+               padding: 3px 20px;
+               /* width: 100%; */
+               border: none;
+               outline: none;
+               background-color: transparent;
+               border-bottom: 1px solid #333;
+               text-transform: capitalize;
+          }
+          input[type="submit"]{
+               outline: none;
+               border: none;
+               padding: 4px 3px;
+               border-radius: 3px;
+               background: rgba(39, 38, 38, 0.689);
+               color: #ddd;
+               text-transform: capitalize;
+               transition: all .5s ease;
+               cursor: pointer;
+          }
+          input[type="submit"]:hover{
+               background: #ddd;
+               color: rgba(0, 0, 0, 0.887);
+               /* font-size: 13.5px; */
           }
 
           #result {
@@ -28,8 +69,12 @@
                outline: none;
                padding: 5px 9px;
                border-radius: 5px;
-               background: rgba(184, 67, 67, 0.822);
+               /* background: rgba(184, 67, 67, 0.822); */
                cursor: pointer;
+               background-color: rgba(39, 38, 38, 0.689);
+               color: #ddd;
+               /* margin-left: 35%; */
+               margin: 2% 0 2% 35% ;
           }
           .todolist{
                background-color: red;
@@ -47,15 +92,17 @@
 <body>
      <main>
           <div class="container">
+               <h1>To do list</h1>
                <form action="#">
-                    <input type="text" id="input">
+                    <input type="text" id="input" required>
                     <input type="submit" value="submit" id="submit">
                </form>
-          </div>
+          
           <div id="result">
                <!-- <span>tast list</span> -->
           </div>
           <button class="cls-btn">Clear Task</button>
+     </div>
      </main>
 
      <!-- *********** JavaScript code ************** -->
@@ -99,10 +146,10 @@
                }
                tasklist.push(input)
                localStorage.setItem('localItem', JSON.stringify(tasklist));
-               tasklist.forEach((element, index) => {
+               tasklist.forEach((data, index) => {
                     taskShow +=`
                     <div class = "todolist">
-                    <p class="ptage">${element}</p> 
+                    <p class="ptage">${data}</p> 
                     <button class ="deleteTask" onclick="deleteItem(${index})">x</button>
                     </div>
                `
